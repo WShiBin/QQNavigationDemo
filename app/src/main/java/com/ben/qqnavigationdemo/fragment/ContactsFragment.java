@@ -28,7 +28,7 @@ import com.ben.qqnavigationdemo.R;
 
 public class ContactsFragment extends Fragment {
 
-    private static final String TAG = "MessageFragment";
+    private static final String TAG = "ContactsFragment";
     private String mTagtext;
 
     @Override
@@ -41,6 +41,7 @@ public class ContactsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         View inflate = inflater.inflate(R.layout.fragment_contacts, null);
         TextView tvText = (TextView) inflate.findViewById(R.id.tv_text);
         if (mTagtext != null && !TextUtils.isEmpty(mTagtext)) {

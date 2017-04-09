@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
+//import android.support.v4.app.FragmentTabHost;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -22,7 +23,7 @@ import com.ben.qqnavigationdemo.fragment.StarFragment;
 import com.ben.qqnavigationdemo.view.CircleImageView;
 import com.ben.qqnavigationdemo.view.FragmentTabHost;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     private DrawerLayout mDrawer;
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initBottomNavigationView() {
-
         mTabTexts = getResources().getStringArray(R.array.tab_texts);
 
         for (int i = 0; i < mTabTexts.length; i++) {
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ((TextView) mTabView.findViewById(R.id.tv_tab_text)).setText(mTabTexts[i]);
             ((ImageView) mTabView.findViewById(R.id.iv_tab_icon)).setImageResource(mTabIcons[i]);
 
+            //创建TabSpec
             TabHost.TabSpec messageTabSpec = mTabHost.newTabSpec(mTabTexts[i]).setIndicator(mTabView);
 
             Bundle bundle = new Bundle();
@@ -123,7 +124,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initEvent() {
-        mCivHead.setOnClickListener(this);
+        mCivHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mDrawer.isDrawerOpen(GravityCompat.START)) {
+                    mDrawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -134,16 +143,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mTvMore.setVisibility(mTabTexts[2].equals(tabId) ? View.VISIBLE : View.GONE);
             }
         });
+
         mColorShades = new ColorShades();
+
         mDrawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
+                //设置主布局随菜单滑动而滑动
                 int drawerViewWidth = drawerView.getWidth();
                 mLlContentMain.setTranslationX(drawerViewWidth * slideOffset);
 
+                //设置控件最先出现的位置
                 double padingLeft = drawerViewWidth * (1 - 0.618) * (1 - slideOffset);
                 mRlMenu.setPadding((int) padingLeft, 0, 0, 0);
 
+                //设置Title颜色渐变
                 mColorShades.setFromColor("#001AA7F2")
                         .setToColor(Color.WHITE)
                         .setShade(slideOffset);
@@ -180,16 +194,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
         mTabHost = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.civ_head:
-                if (!mDrawer.isDrawerOpen(GravityCompat.START)) {
-                    mDrawer.openDrawer(GravityCompat.START);
-                }
-                break;
-        }
     }
 }

@@ -41,6 +41,7 @@ public class StarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         View inflate = inflater.inflate(R.layout.fragment_star, null);
         TextView tvText = (TextView) inflate.findViewById(R.id.tv_text);
         if (mTagtext != null && !TextUtils.isEmpty(mTagtext)) {

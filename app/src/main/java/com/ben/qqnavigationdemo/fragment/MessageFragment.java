@@ -30,8 +30,6 @@ public class MessageFragment extends Fragment {
 
 
     private static final String TAG = "MessageFragment";
-    private int someVarA;
-    private String someVarB;
     private String mTagtext;
 
     @Override
@@ -44,6 +42,7 @@ public class MessageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         View inflate = inflater.inflate(R.layout.fragment_message, null);
         TextView tvText = (TextView) inflate.findViewById(R.id.tv_text);
         if (mTagtext != null && !TextUtils.isEmpty(mTagtext)) {
@@ -54,26 +53,5 @@ public class MessageFragment extends Fragment {
         }
 
         return inflate;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(TAG, "onSaveInstanceState: ");
-        outState.putInt("someVarA", someVarA);
-        outState.putString("someVarB", someVarB);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.i(TAG, "onActivityCreated: ");
-        if (savedInstanceState != null) {
-            someVarA = savedInstanceState.getInt("someVarA");
-            someVarB = savedInstanceState.getString("someVarB");
-
-            Log.i(TAG, "onActivityCreated: someVarA -- " + someVarA);
-            Log.i(TAG, "onActivityCreated: someVarB -- " + someVarB);
-        }
     }
 }
