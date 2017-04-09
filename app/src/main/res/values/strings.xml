@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">QQNavigationDemo</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="camera">Camera</string>
+    <string name="message">消息</string>
+    <string name="setting">设置</string>
+    <string name="night">夜间</string>
+    <string name="my_folder">我的文件</string>
+    <string name="my_photo">我的相册</string>
+    <string name="my_favourite">我的收藏</string>
+    <string name="my_wallet">我的钱包</string>
+    <string name="add">添加</string>
+    <string name="more">更多</string>
+    <string name="get_more_about_member">了解会员特权</string>
+    <string name="user_name">Ben</string>
+    <string name="email">shib90@qq.com</string>
+</resources>
